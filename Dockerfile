@@ -1,11 +1,11 @@
 FROM python:3
 
-ENV NODE_VERSION 10.15.3
+ENV NODE_VERSION 11.14.0
 
-RUN addgroup -gid 1000 node
-RUN adduser -u 1000 -group node -shell /bin/sh -disabled-password node
+RUN addgroup -g 1000 node
+RUN adduser -u 1000 -G node -s /bin/sh -D node
 RUN apk add --no-cache \
-        libstdc++ \
+        libstdc++
 RUN apk add --no-cache --virtual .build-deps \
         binutils-gold \
         curl \
@@ -48,7 +48,7 @@ RUN apk add --no-cache --virtual .build-deps \
     && rm -Rf "node-v$NODE_VERSION" \
     && rm "node-v$NODE_VERSION.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt
 
-ENV YARN_VERSION 1.13.0
+ENV YARN_VERSION 1.15.2
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
