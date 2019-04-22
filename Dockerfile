@@ -42,7 +42,7 @@ ENV YARN_VERSION 0.0.0
 
 RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && for key in \
-    "${YARN_KEYS[@]}"
+    "${YARN_KEYS[@]}" \
   ; do \
     gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
