@@ -2,11 +2,11 @@ FROM python:3
 
 ENV NODE_VERSION 10.15.3
 
-RUN addgroup -g 1000 node \
-    && adduser -u 1000 -group node -s /bin/sh -D node \
-    && apk add --no-cache \
+RUN addgroup -g 1000 node
+RUN adduser -u 1000 -g node -s /bin/sh -D node
+RUN apk add --no-cache \
         libstdc++ \
-    && apk add --no-cache --virtual .build-deps \
+RUN apk add --no-cache --virtual .build-deps \
         binutils-gold \
         curl \
         g++ \
