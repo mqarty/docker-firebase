@@ -18,7 +18,7 @@ RUN addgroup -g 1000 node \
         python \
   # gpg keys listed at https://github.com/nodejs/node#release-keys
   && for key in \
-    "${NODE_KEYS[@]}"
+    "${NODE_KEYS[@]}" \
   ; do \
     gpg --batch --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys "$key" || \
     gpg --batch --keyserver hkp://ipv4.pool.sks-keyservers.net --recv-keys "$key" || \
@@ -57,7 +57,7 @@ RUN apk add --no-cache --virtual .build-deps-yarn curl gnupg tar \
   && ln -s /opt/yarn-v$YARN_VERSION/bin/yarnpkg /usr/local/bin/yarnpkg \
   && rm yarn-v$YARN_VERSION.tar.gz.asc yarn-v$YARN_VERSION.tar.gz \
   && apk del .build-deps-yarn
-  
+
 # install Firebase CLI
 RUN yarn global add firebase-tools@latest
 RUN yarn global add firebase-admin@latest
