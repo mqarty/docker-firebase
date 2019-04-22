@@ -3,7 +3,7 @@ FROM python:3
 ENV NODE_VERSION 10.15.3
 
 RUN addgroup -gid 1000 node
-RUN adduser -u 1000 -g node -s /bin/sh -D node
+RUN adduser -u 1000 -group node -shell /bin/sh -disabled-password node
 RUN apk add --no-cache \
         libstdc++ \
 RUN apk add --no-cache --virtual .build-deps \
