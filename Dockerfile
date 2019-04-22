@@ -2,7 +2,7 @@ FROM python:3
 
 ENV NODE_VERSION 10.15.3
 
-RUN addgroup -g 1000 node
+RUN addgroup -gid 1000 node
 RUN adduser -u 1000 -g node -s /bin/sh -D node
 RUN apk add --no-cache \
         libstdc++ \
