@@ -65,3 +65,6 @@ RUN set -ex \
 RUN yarn global add firebase-tools@latest
 RUN yarn global add firebase-admin@latest
 RUN yarn global add firebase-functions@latest
+
+# instal Sentry CLI
+RUN curl -sL https://sentry.io/get-cli/ | bash
