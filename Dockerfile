@@ -1,9 +1,14 @@
-FROM python:3
+FROM python:3.7
+
+RUN apt -y update
+RUN apt install -y mdbtools
+RUN apt install -y postgresql-client
+RUN pip install --upgrade pip 
 
 RUN groupadd --gid 1000 node \
   && useradd --uid 1000 --gid node --shell /bin/bash --create-home node
 
-ENV NODE_VERSION 12.4.0
+ENV NODE_VERSION 12.11.0
 
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
@@ -42,7 +47,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && rm "node-v$NODE_VERSION-linux-$ARCH.tar.xz" SHASUMS256.txt.asc SHASUMS256.txt \
   && ln -s /usr/local/bin/node /usr/local/bin/nodejs
 
-ENV YARN_VERSION 1.15.2
+ENV YARN_VERSION 1.19.1
 
 RUN set -ex \
   && for key in \
@@ -66,5 +71,17 @@ RUN yarn global add firebase-tools@latest
 RUN yarn global add firebase-admin@latest
 RUN yarn global add firebase-functions@latest
 
-# instal Sentry CLI
+# install Serverless
+RUN yarn global add serverless@latest
+
+# install Sentry CLI
 RUN curl -sL https://sentry.io/get-cli/ | bash
+
+# install other requirements
+COPY requirements.txt requirements.txt
+
+RUN pip install -r requirements.txt
+
+COPY . .
+
+RUN chmod +x deploy/*
