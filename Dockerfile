@@ -73,15 +73,3 @@ RUN yarn global add firebase-functions@latest
 
 # install Serverless
 RUN yarn global add serverless@latest
-
-# install Sentry CLI
-RUN curl -sL https://sentry.io/get-cli/ | bash
-
-# install other requirements
-COPY requirements.txt requirements.txt
-
-RUN pip install -r requirements.txt
-
-COPY . .
-
-RUN chmod +x deploy/*
