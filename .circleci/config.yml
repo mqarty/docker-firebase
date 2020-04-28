@@ -1,12 +1,16 @@
 version: 2.1
-jobs:
-  build_and_push:
+
+executors:
+  python_executor:
+    resource_class: medium
     docker:
       - image: circleci/python:3.7
+
+jobs:
+  build_and_push:
+    executor: python_executor
     steps:
       - checkout
-      # - setup_remote_docker:
-      #     docker_layer_caching: true
       - run:
           name: "Build and Push"
           command: |
@@ -15,6 +19,7 @@ jobs:
             echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
             docker push mqarty/docker-firebase:$TAG
             docker push mqarty/docker-firebase:latest
+
 workflows:
   version: 2
   build_and_push_image:
