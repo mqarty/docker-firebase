@@ -5,8 +5,8 @@ jobs:
       - image: docker:18
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      # - setup_remote_docker:
+      #     docker_layer_caching: true
       - run:
           name: "Build and Push"
           command: |
